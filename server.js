@@ -14,8 +14,8 @@ app.use(router);
 router.get("/", function (req, res) {
   console.log(req.headers);
   res.header({
-    "custom-header": "Nuestro valor personalizado"
-  })
+    "custom-header": "Nuestro valor personalizado",
+  });
   res.send("Hola desde GET");
 });
 
@@ -26,6 +26,18 @@ router.post("/", function (req, res) {
   res.send(
     `Hola desde POST, mensaje añadido correctamente ${req.query.message}`
   );
+});
+
+router.delete("/", function (req, res) {
+  console.log(req.query);
+  console.log(req.body);
+
+  res.status(201).send([
+    {
+      error: "",
+      body: "Creado correctamente",
+    },
+  ]);
 });
 
 app.listen(3000);
