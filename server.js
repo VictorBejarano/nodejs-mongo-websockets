@@ -34,5 +34,7 @@ router.delete("/", function (req, res) {
   response.error(req, res, 'No se encuentra');
 });
 
+app.use('/app', express.static('public'))
+
 app.listen(3000);
 console.log(`La aplicacion esta escuchando en http://localhost:3000`);
