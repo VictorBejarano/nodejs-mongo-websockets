@@ -12,6 +12,10 @@ app.use(router);
 // });
 
 router.get("/", function (req, res) {
+  console.log(req.headers);
+  res.header({
+    "custom-header": "Nuestro valor personalizado"
+  })
   res.send("Hola desde GET");
 });
 
@@ -19,10 +23,10 @@ router.post("/", function (req, res) {
   console.log(req.query);
   console.log(req.body);
 
-  res.send(`Hola desde POST, mensaje añadido correctamente ${req.query.message}`);
+  res.send(
+    `Hola desde POST, mensaje añadido correctamente ${req.query.message}`
+  );
 });
 
 app.listen(3000);
-console.log(
-  `La aplicacion esta escuchando en http://localhost:3000`
-);
+console.log(`La aplicacion esta escuchando en http://localhost:3000`);
