@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const router = express.Router();
 
+const response = require("./network/response");
+
 var app = express(); // Inicializa express
 
 app.use(bodyParser.json());
@@ -16,28 +18,20 @@ router.get("/", function (req, res) {
   res.header({
     "custom-header": "Nuestro valor personalizado",
   });
-  res.send("Hola desde GET");
+  response.success(req, res, 'Lista de mensajes');
 });
 
 router.post("/", function (req, res) {
   console.log(req.query);
   console.log(req.body);
 
-  res.send(
-    `Hola desde POST, mensaje añadido correctamente ${req.query.message}`
-  );
+  response.success(req, res, 'Creado correctamente');
 });
 
 router.delete("/", function (req, res) {
   console.log(req.query);
   console.log(req.body);
-
-  res.status(201).send([
-    {
-      error: "",
-      body: "Creado correctamente",
-    },
-  ]);
+  response.error(req, res, 'No se encuentra');
 });
 
 app.listen(3000);
